@@ -11,18 +11,46 @@
     <name>Camel File to Excel Blueprint</name>
     <packaging>bundle</packaging>
 
-    <properties>
-        <!-- the version of the JBoss Fuse BOM, defining all the dependency versions -->
-        <jboss.fuse.bom.version>6.3.0.redhat-262</jboss.fuse.bom.version>
-    </properties>
+    <!--<properties>-->
+        <!--&lt;!&ndash; the version of the JBoss Fuse BOM, defining all the dependency versions &ndash;&gt;-->
+        <!--<jboss.fuse.bom.version>6.3.0.redhat-262</jboss.fuse.bom.version>-->
+    <!--</properties>-->
 
+
+    <!--<dependencyManagement>-->
+        <!--<dependencies>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.fuse.bom</groupId>-->
+                <!--<artifactId>jboss-fuse-parent</artifactId>-->
+                <!--<version>${jboss.fuse.bom.version}</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
+        <!--</dependencies>-->
+    <!--</dependencyManagement>-->
+
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- maven plugin versions -->
+        <fabric8.maven.plugin.version>3.1.80.redhat-000010</fabric8.maven.plugin.version>
+
+        <!-- configure the versions you want to use here -->
+        <fabric8.version>2.2.170.redhat-000010</fabric8.version>
+        <spring-boot.version>1.4.1.RELEASE</spring-boot.version>
+
+        <maven-compiler-plugin.version>3.3</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.18.1</maven-surefire-plugin.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.fuse.bom</groupId>
-                <artifactId>jboss-fuse-parent</artifactId>
-                <version>${jboss.fuse.bom.version}</version>
+                <groupId>io.fabric8</groupId>
+                <artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
+                <version>${fabric8.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
