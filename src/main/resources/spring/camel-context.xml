@@ -23,6 +23,19 @@
 
 <camelContext xmlns="http://camel.apache.org/schema/spring">
 
+ <route id="jdbc-route">
+    <from uri="timer://timer1?period=2s" />
+    <log message="select from articles"/>
+    <setBody>
+                <constant>
+                    SELECT * FROM ARTICLES WHERE CATEGORY='Camel'
+                </constant>
+            </setBody>
+            <to uri="jdbc:dataSource" />
+	<log message="${body}"/>
+ </route>
+ 
+
 </camelContext>
 
 
