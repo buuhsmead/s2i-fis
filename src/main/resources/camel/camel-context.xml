@@ -9,7 +9,7 @@
     <!--<bean id="excelProcessing" class="com.github.buuhsmead.s2ifuse.file.FileToExcelProcessor"/>-->
     <!--<bean id="formatProcessing" class="com.github.buuhsmead.s2ifuse.file.FileToFormatProcessor"/>-->
 
-
+<!--
 <jdbc:initialize-database data-source="dataSource" enabled="true">
             </jdbc:initialize-database>
 
@@ -20,6 +20,7 @@
         <property name="username" value="${env:DB_USERNAME}" />
         <property name="password" value="${env:DB_USERPW}" />
     </bean>
+-->
 
 <camelContext xmlns="http://camel.apache.org/schema/spring">
 
