@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring       http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+    <!--<bean id="excelProcessing" class="com.github.buuhsmead.s2ifuse.file.FileToExcelProcessor"/>-->
+    <!--<bean id="formatProcessing" class="com.github.buuhsmead.s2ifuse.file.FileToFormatProcessor"/>-->
+
+
+<jdbc:initialize-database data-source="dataSource" enabled="true">
+            </jdbc:initialize-database>
+
+<bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:postgresql://${env:DB_HOST}/${env_DB_DB}" />
+        <property name="username" value="${env:DB_USERNAME}" />
+        <property name="password" value="${env:DB_USERPW}" />
+    </bean>
+
+<camelContext xmlns="http://camel.apache.org/schema/spring">
+
+ <route id="jdbc-route">
+    <from uri="timer://timer1?period=2s" />
+    <log message="select from articles"/>
+    <setBody>
+                <constant>
+                    SELECT * FROM ARTICLES WHERE CATEGORY='Camel'
+                </constant>
+            </setBody>
+            <to uri="jdbc:dataSource" />
+	<log message="${body}"/>
+ </route>
+ 
+
+</camelContext>
+
+
+
+    <!--<camelContext xmlns="http://camel.apache.org/schema/spring"-->
+                  <!--id="file-excel-context">-->
+
+        <!--<route id="file-route">-->
+            <!--<from uri="file:{{file_data_inbox}}"/>-->
+            <!--<log message="Receiving file ${file:name}"/>-->
+            <!--<log message="writing excel to : {{excel_data_out}}"/>-->
+            <!--<log message="writing format to : {{format_data_out}}"/>-->
+            <!--<multicast parallelProcessing="true">-->
+                <!--<to uri="direct:excelOutput"/>-->
+                <!--<to uri="direct:formatOutput"/>-->
+            <!--</multicast>-->
+            <!--<log message="Done processing ${file:name}"/>-->
+        <!--</route>-->
+
+        <!--<route id="excel-output">-->
+            <!--<from uri="direct:excelOutput"/>-->
+            <!--<bean ref="excelProcessing"/>-->
+            <!--<log message="excel output done."/>-->
+        <!--</route>-->
+
+        <!--<route id="format-output">-->
+            <!--<from uri="direct:formatOutput"/>-->
+            <!--<bean ref="formatProcessing"/>-->
+            <!--<log message="format output done."/>-->
+        <!--</route>-->
+    <!--</camelContext>-->
+</beans>
