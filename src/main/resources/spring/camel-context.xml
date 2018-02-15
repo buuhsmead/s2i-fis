@@ -10,6 +10,22 @@
     <!--<bean id="formatProcessing" class="com.github.buuhsmead.s2ifuse.file.FileToFormatProcessor"/>-->
 
 
+<jdbc:initialize-database data-source="dataSource" enabled="true">
+            </jdbc:initialize-database>
+
+<bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:postgresql://${env:DB_HOST}/${env_DB_DB}" />
+        <property name="username" value="${env:DB_USERNAME}" />
+        <property name="password" value="${env:DB_USERPW}" />
+    </bean>
+
+<camelContext xmlns="http://camel.apache.org/schema/spring">
+
+</camelContext>
+
+
 
     <!--<camelContext xmlns="http://camel.apache.org/schema/spring"-->
                   <!--id="file-excel-context">-->

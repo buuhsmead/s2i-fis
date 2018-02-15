@@ -2,3 +2,6 @@
 .idea/
 file-multicast-karaf.iml
 target/
+.classpath
+.project
+.settings/
